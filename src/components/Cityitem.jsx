@@ -8,12 +8,19 @@ const formatDate = (date) =>
     month: "long",
     year: "numeric",
   }).format(new Date(date));
-
-function CityItem({ city }) {
+export default function CityItem({ city }) {
   const { currentCity, deleteCity } = useCities();
   const { cityName, emoji, date, id, position } = city;
 
-  function handleClick(e) {
+  const flagemojiToPNG = (emoji) => {
+    var countryCode = Array.from(emoji, (codeUnit) => codeUnit.codePointAt())
+      .map((char) => String.fromCharCode(char - 127397).toLowerCase())
+      .join("");
+    return (
+      <img src={`https://flagcdn.com/24x18/${countryCode}.png`} alt="flag" />
+    );
+  };
+  function handleclick(e) {
     e.preventDefault();
     deleteCity(id);
   }
@@ -26,15 +33,14 @@ function CityItem({ city }) {
         }`}
         to={`${id}?lat=${position.lat}&lng=${position.lng}`}
       >
-        <span className={styles.emoji}>{emoji}</span>
+        <span className={styles.emoji}>{flagemojiToPNG(emoji)}</span>{" "}
+        {/* Call the function with emoji as argument */}
         <h3 className={styles.name}>{cityName}</h3>
-        <time className={styles.date}>({formatDate(date)})</time>
-        <button className={styles.deleteBtn} onClick={handleClick}>
+        <time className={styles.time}>{formatDate(date)}</time>
+        <button className={styles.deleteBtn} onClick={handleclick}>
           &times;
         </button>
       </Link>
     </li>
   );
 }
-
-export default CityItem;

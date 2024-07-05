@@ -64,7 +64,7 @@ function Map() {
             key={city.id}
           >
             <Popup>
-              <span>{city.emoji}</span> <span>{city.cityName}</span>
+              <span>{city.cityName}</span>
             </Popup>
           </Marker>
         ))}
