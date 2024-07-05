@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useCities } from "../context/CitiesContext";
+import { useCities } from "../contexts/CitiesContext";
+import BackButton from "./BackButton";
 import styles from "./City.module.css";
 import Spinner from "./Spinner";
-import BackButton from "./BackButton";
 
 const formatDate = (date) =>
   new Intl.DateTimeFormat("en", {
@@ -15,23 +15,19 @@ const formatDate = (date) =>
 
 function City() {
   const { id } = useParams();
-  const { getCity, currentCity, loading } = useCities();
+  const { getCity, currentCity, isLoading } = useCities();
 
-  useEffect(() => {
-    getCity(id);
-  }, [id, getCity]);
+  useEffect(
+    function () {
+      getCity(id);
+    },
+    [id, getCity]
+  );
 
-  if (loading) return <Spinner />;
   const { cityName, emoji, date, notes } = currentCity;
 
-  const flagemojiToPNG = () => {
-    var countryCode = Array.from(emoji, (codeUnit) => codeUnit.codePointAt())
-      .map((char) => String.fromCharCode(char - 127397).toLowerCase())
-      .join("");
-    return (
-      <img src={`https://flagcdn.com/24x18/${countryCode}.png`} alt="flag" />
-    );
-  };
+  if (isLoading) return <Spinner />;
+
   return (
     <div className={styles.city}>
       <div className={styles.row}>

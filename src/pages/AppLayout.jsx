@@ -1,10 +1,10 @@
-import React from "react";
-
-import Sidebar from "../components/sidebar";
 import Map from "../components/Map";
-import styles from "./AppLayout.module.css";
+import Sidebar from "../components/Sidebar";
 import User from "../components/User";
-export default function AppLayout() {
+
+import styles from "./AppLayout.module.css";
+
+function AppLayout() {
   return (
     <div className={styles.app}>
       <Sidebar />
@@ -13,3 +13,5 @@ export default function AppLayout() {
     </div>
   );
 }
+
+export default AppLayout;

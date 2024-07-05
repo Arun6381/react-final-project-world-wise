@@ -1,17 +1,19 @@
-import React from "react";
 import Spinner from "./Spinner";
 import styles from "./CountryList.module.css";
-import CountryItem from "./CountryItem"; // Corrected import: "CityItem" instead of "Cityitem"
+import CountryItem from "./CountryItem";
 import Message from "./Message";
-import { useCities } from "../context/CitiesContext";
-export default function CountryList() {
-  const { cities, loading } = useCities();
-  if (loading) return <Spinner />;
-  // Check if cities is undefined or not an array
+import { useCities } from "../contexts/CitiesContext";
+
+function CountryList() {
+  const { cities, isLoading } = useCities();
+
+  if (isLoading) return <Spinner />;
+
   if (!cities.length)
     return (
       <Message message="Add your first city by clicking on a city on the map" />
     );
+
   const countries = cities.reduce((arr, city) => {
     if (!arr.map((el) => el.country).includes(city.country))
       return [...arr, { country: city.country, emoji: city.emoji }];
@@ -26,3 +28,5 @@ export default function CountryList() {
     </ul>
   );
 }
+
+export default CountryList;

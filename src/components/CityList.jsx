@@ -1,18 +1,19 @@
-import React from "react";
 import Spinner from "./Spinner";
 import styles from "./CityList.module.css";
-import CityItem from "./Cityitem"; // Corrected import: "CityItem" instead of "Cityitem"
+import CityItem from "./CityItem";
 import Message from "./Message";
-import { useCities } from "../context/CitiesContext";
+import { useCities } from "../contexts/CitiesContext";
 
-export default function CityList() {
-  const { cities, loading } = useCities();
-  if (loading) return <Spinner />;
-  // Check if cities is undefined or not an array
+function CityList() {
+  const { cities, isLoading } = useCities();
+
+  if (isLoading) return <Spinner />;
+
   if (!cities.length)
     return (
       <Message message="Add your first city by clicking on a city on the map" />
     );
+
   return (
     <ul className={styles.cityList}>
       {cities.map((city) => (
@@ -21,3 +22,5 @@ export default function CityList() {
     </ul>
   );
 }
+
+export default CityList;

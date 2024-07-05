@@ -1,10 +1,11 @@
 import PageNav from "../components/PageNav";
 import styles from "./Product.module.css";
-import { Link } from "react-router-dom";
+
 export default function Product() {
   return (
     <main className={styles.product}>
       <PageNav />
+
       <section>
         <img
           src="img-1.jpg"
@@ -23,9 +24,6 @@ export default function Product() {
             doloribus libero sunt expedita ratione iusto, magni, id sapiente
             sequi officiis et.
           </p>
-          <Link to="/login" className="cta">
-            Start Tracking
-          </Link>
         </div>
       </section>
     </main>
