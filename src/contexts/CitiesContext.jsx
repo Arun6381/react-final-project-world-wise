@@ -59,7 +59,6 @@ function reducer(state, action) {
       throw new Error("Unknown action type");
   }
 }
-
 function CitiesProvider({ children }) {
   const [{ cities, isLoading, currentCity, error }, dispatch] = useReducer(
     reducer,
